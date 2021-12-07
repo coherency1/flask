@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<table class="table table-striped">
+    <thead>
+                    <tr>
+                    <th>Customer Email</th>
+
+
+                        <th>Total Tickets</th>
+
+
+                    </tr>
+                    </thead>
+
+     <tbody>
+                    {% for row in ticket_data %}
+                    <tr>
+                    <td>{{row['customer_email']}}</td>
+                         <td>{{row['count(*)']}}</td>
+
+
+                    </tr>
+
+                    {% endfor %}
+                    </tbody>
+
+    </table>
+
+<table class="table table-striped">
+    <thead>
+                    <tr>
+                    <th>Customer Email</th>
+                        <th>Total Commission</th>
+
+
+
+
+                    </tr>
+                    </thead>
+
+     <tbody>
+                    {% for row in commission_data %}
+                    <tr>
+                    <td>{{row['customer_email']}}</td>
+                         <td>{{row['commission']}}</td>
+
+
+                    </tr>
+
+                    {% endfor %}
+                    </tbody>
+
+    </table>
+
+
+
+
+<a class="btn btn-primary" href="{{ url_for('booking_agent_home')}}" role="button">Back Home</a>
+
+{% endblock %}

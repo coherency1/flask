@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<a class="btn btn-primary" href="{{ url_for('get_duration')}}" role="button">Specific Search</a>
+
+
+<table class="table table-striped">
+    <thead>
+                    <tr>
+                    <th>Total Commission</th>
+                        <th>Average Commission</th>
+
+                        <th>Total Tickets</th>
+
+
+                    </tr>
+                    </thead>
+
+     <tbody>
+                    {% for row in data %}
+                    <tr>
+                    <td>{{row['total_commission']}}</td>
+                         <td>{{row['average_commission']}}</td>
+                        <td>{{row['salecount']}}</td>
+
+                    </tr>
+
+
+
+
+
+
+
+
+                    {% endfor %}
+                    </tbody>
+
+    </table>
+
+<form method="post">
+<div class="form-group">
+    <label for="starting_date">Input Value Here in YYYY-MM-DD</label>
+    <input
+      type="text"
+      class="form-control"
+      id="starting_date"
+      name="starting_date"
+      placeholder=" Input Value Here"
+    />
+  </div>
+
+             <br />
+
+      <div class="form-group">
+    <label for="duration">How many months before?</label>
+    <input
+      type="text"
+      class="form-control"
+      id="duration"
+      name="duration"
+      placeholder=" Input Value Here"
+    />
+  </div>
+
+
+</select>
+
+
+
+  <br />
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<a class="btn btn-primary" href="{{ url_for('booking_agent_home')}}" role="button">Back Home</a>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if name %}
+	<h1>Welcome back, Agent {{name}}</h1>
+
+{% endif %}
+
+
+
+<a class="btn btn-primary" href="{{ url_for('booking_agent_viewmyflights')}}" role="button">View Flights</a>
+
+<a class="btn btn-primary" href="{{ url_for('customer_searchforflights')}}" role="button">Search for Flights</a>
+
+<a class="btn btn-primary" href="{{ url_for('agent_logout')}}" role="button">Logout</a>
+
+
+
+
+
+
+{% endblock %}

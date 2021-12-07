@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<a class="btn btn-primary" href="{{ url_for('purchase_info')}}" role="button">Specific Search</a>
+
+<table class="table table-striped">
+    <thead>
+                    <tr>
+                    <th>Airline Name</th>
+                    <th>Flight Num</th>
+                    <th>Departure Airport</th>
+                    <th>Departure Time</th>
+                        <th>Arrival Airport</th>
+                        <th>Arrival Time</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Airplane ID</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for row in data %}
+                    <tr>
+                    <td>{{row['airline_name']}}</td>
+                    <td>{{row['flight_num']}}</td>
+                    <td>{{row['departure_airport']}}</td>
+                    <td>{{row['departure_time']}}</td>
+                    <td>{{row['arrival_airport']}}</td>
+                        <td>{{row['arrival_time']}}</td>
+                        <td>{{row['price']}}</td>
+                        <td>{{row['status']}}</td>
+                        <td>{{row['airplane_id']}}</td>
+
+                        {% if permission == 'Operator' %}
+
+                        <td>{{row['airline_name']}}</td>
+
+                        <td>
+                            <form method="POST" action="{{url_for('customer_searchforflights')}}">
+                                <input type="hidden" name="airline_name" value="{{row['airline_name']}}" />
+                                <input type="hidden" name="flight_num" value= {{row['flight_num']}}>
+                            <button type="submit" class="btn btn-primary">Change Flight Status</button>
+                                </form>
+                        </td>
+
+
+                        {% endif %}
+
+
+
+                        {% if row['status'] == 'Upcoming' %}
+
+                        <td>
+                            {% if loginType == 'agent' %}
+                            <form method="POST" action="{{url_for('customer_searchforflights')}}">
+                                <input type="hidden" name="flight_num" value= {{row['flight_num']}}>
+                            <button type="submit" class="btn btn-primary">Purchase</button>
+
+                                {% elif default %}
+
+
+                                {% else %}
+                            <form method="POST" action="{{url_for('customer_searchforflights')}}">
+                                <input type="hidden" name="flight_num" value= {{row['flight_num']}}>
+                            <button type="submit" class="btn btn-primary">Purchase</button>
+
+                                {% endif %}
+
+
+                                </form>
+
+
+                        </td>
+                        {% endif %}
+
+
+
+
+
+
+                    </tr>
+
+
+
+
+                    {% endfor %}
+                    </tbody>
+
+     </table>
+
+
+    {% if loginType == 'agent' %}
+    <a class="btn btn-primary" href="{{ url_for('booking_agent_home')}}" role="button">Back Home</a>
+    {% else %}
+    <a class="btn btn-primary" href="{{ url_for('customer_home')}}" role="button">Back Home</a>
+     {% endif %}
+
+
+
+
+
+{% endblock %}
